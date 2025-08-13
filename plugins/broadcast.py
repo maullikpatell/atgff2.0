@@ -57,7 +57,7 @@ async def send_msg(user_id, message):
 
 
 async def main_broadcast_handler(m: Message):
-    all_users = await get_all_users()
+    all_users = get_all_users()
     broadcast_msg = m.reply_to_message
     while True:
         broadcast_id = ''.join(
@@ -104,3 +104,4 @@ async def main_broadcast_handler(m: Message):
         await m.reply_document(document='broadcast.txt', caption=f"Broadcast completed in `{completed_in}`\n\nTotal users {total_users}.\nTotal done {done}, {success} success and {failed} failed.", quote=True)
 
     await aiofiles.os.remove('broadcast.txt')
+
