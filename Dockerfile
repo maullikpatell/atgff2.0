@@ -6,7 +6,7 @@ COPY requirements.txt /requirements.txt
 
 RUN cd /
 RUN pip3 install -U pip && pip3 install -U -r requirements.txt
-RUN mkdir /DTG-linkszad-bot
-WORKDIR /DTG-linkszad-bot 
+RUN mkdir /atgff2.0
+WORKDIR /atgff2.0 
 COPY start.sh /start.sh
 CMD ["/bin/bash", "/start.sh"]
