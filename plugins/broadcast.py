@@ -76,12 +76,7 @@ async def main_broadcast_handler(m: Message):
 
     async with aiofiles.open('broadcast.txt', 'w') as broadcast_log_file:
         async for user in all_users:
-            uid = user.get('user_id')
-        if uid is None:
-            logging.warning("Skipping user doc without 'user_id': %s", user)
-            continue
-        sts, msg = await send_msg(user_id=int(uid), message=broadcast_msg)
-
+            sts, msg = await send_msg(user_id=int(user['user_id']), message=broadcast_msg)
             if msg is not None:
                 await broadcast_log_file.write(msg)
             if sts == 200:
@@ -109,5 +104,6 @@ async def main_broadcast_handler(m: Message):
         await m.reply_document(document='broadcast.txt', caption=f"Broadcast completed in `{completed_in}`\n\nTotal users {total_users}.\nTotal done {done}, {success} success and {failed} failed.", quote=True)
 
     await aiofiles.os.remove('broadcast.txt')
+
 
 
