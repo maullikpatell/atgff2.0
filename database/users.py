@@ -47,7 +47,8 @@ async def total_users_count():
     return await col.count_documents({})
 
 def get_all_users():
-    return col.find({})
+    return col.find({"user_id": {"$exists": True, "$type": "int"}})
+    
     
 async def delete_user(user_id):
     await col.delete_one({'user_id': int(user_id)})
@@ -58,5 +59,6 @@ async def total_users_count():
 async def is_user_exist(id):
     user = await col.find_one({'user_id':int(id)})
     return bool(user)
+
 
 
