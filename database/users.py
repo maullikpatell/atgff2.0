@@ -46,7 +46,7 @@ async def filter_users(dict):
 async def total_users_count():
     return await col.count_documents({})
 
-async def get_all_users():
+def get_all_users():
     return col.find({})
     
 async def delete_user(user_id):
@@ -58,4 +58,5 @@ async def total_users_count():
 async def is_user_exist(id):
     user = await col.find_one({'user_id':int(id)})
     return bool(user)
+
 
