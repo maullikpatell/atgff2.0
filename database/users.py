@@ -5,8 +5,7 @@ client = AsyncIOMotorClient(DATABASE_URL)
 db = client[DATABASE_NAME]
 col = db["users"]
 
-def get_all_users():          # remove async
-    return col.find({})
+
     
 async def get_user(user_id):
     user_id = int(user_id)
@@ -47,7 +46,9 @@ async def filter_users(dict):
 async def total_users_count():
     return await col.count_documents({})
 
-
+async def get_all_users():
+    return col.find({})
+    
 async def delete_user(user_id):
     await col.delete_one({'user_id': int(user_id)})
 
