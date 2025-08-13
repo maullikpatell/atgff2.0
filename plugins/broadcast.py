@@ -7,6 +7,12 @@ from database.users import get_all_users, total_users_count, delete_user
 from config import ADMINS
 from utils import broadcast_messages
 
+@Client.on_message(filters.command("count") & filters.user(ADMINS))
+async def _(c, m):
+    n = await total_users_count()
+    await m.reply(f"Users in DB: {n}")
+    
+
 @Client.on_message(filters.command("broadcast") & filters.user(ADMINS) & filters.reply)
 async def verupikkals(bot, message):
     users = get_all_users()                      # Motor cursor, no await
@@ -56,3 +62,4 @@ async def verupikkals(bot, message):
         f"Deleted   : {deleted}"
     )
     await sts.edit(f"Broadcast Completed:\nCompleted in {time_taken} seconds.\n\nTotal Users {total_users}\nCompleted: {done} / {total_users}\nSuccess: {success}\nBlocked: {blocked}\nDeleted: {deleted}")
+
